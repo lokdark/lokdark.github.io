@@ -1,12 +1,12 @@
 # ---------------------------------------------------------------------------
-# Levi7's blog — site configuration (Hugo)
+# Luke's blog — site configuration (Hugo)
 # Theme: hello-friend-ng (MIT) https://github.com/rhazdon/hugo-theme-hello-friend-ng
 # ---------------------------------------------------------------------------
 
 # Change this if the site is published somewhere else (custom domain, user page, ...).
-baseURL = "https://dizzy-77.github.io/"
+baseURL = "https://lokdark.github.io/"
 
-title        = "Levi7"
+title        = "Luke"
 locale       = "en-us"
 
 # Language of the content in ./content. Add [languages.xx] blocks below to go
@@ -18,7 +18,7 @@ theme = "hello-friend-ng"
 PygmentsCodeFences = true
 PygmentsStyle      = "monokai"
 
-copyright = "© 2026 Levi7" # Only used by the RSS template.
+copyright = "© 2026 Luke" # Only used by the RSS template.
 
 archetypeDir = "archetypes"
 contentDir   = "content"
@@ -71,7 +71,7 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04"
 
   # Metadata mostly used in document's head
-  description = "Levi7's personal blog"
+  description = "Luke's personal blog"
   keywords    = ""
   images      = [""]
 
@@ -111,7 +111,7 @@ disableHugoGeneratorInject = false
   enableGlobalLanguageMenu = false
 
   # Add extra javascript / stylesheets here, e.g. "css/styles.css" or an http url.
-  customCSS = ["/css/levi7.css"]
+  customCSS = ["/css/Luke.css"]
   customJS  = []
 
   # Integrate Plausible.io
@@ -119,10 +119,10 @@ disableHugoGeneratorInject = false
   # plausibleScriptSource = 'https://plausible.io/js/script.js'
 
   [params.author]
-    name = "Levi7"
+    name = "Luke"
 
   [params.footer]
-    # Footer contents: © 2026 · Levi7 · RSS (set a flag to false to hide it).
+    # Footer contents: © 2026 · Luke · RSS (set a flag to false to hide it).
     trademark = 2026
     rss       = true
     author    = true
@@ -137,14 +137,14 @@ disableHugoGeneratorInject = false
     msapplication = "#1b1c1d"
   [params.logo]
     logoMark     = ">"
-    logoText     = "$ cd /home/levi7"
+    logoText     = "$ cd /home/Luke"
     logoHomeLink = "/"
 
   # Avatar shown above the home page title (file: static/img/avatar.jpg, square).
   # Remove the block to hide it, or point `path` at another image.
   [params.portrait]
     path     = "/img/avatar.jpg"
-    alt      = "Levi7"
+    alt      = "Luke"
     maxWidth = "120px"
 
   # Addon: Utteranc.es comments (GitHub issues backed)
@@ -181,7 +181,7 @@ disableHugoGeneratorInject = false
   [languages.en]
     weight    = 1
   [languages.en.params]
-    subtitle = "Levi7's Blog"
+    subtitle = "Luke's Blog"
 
 [menu]
   [[menu.main]]

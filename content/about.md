@@ -3,10 +3,10 @@ title = "About"
 date = "2014-04-09"
 aliases = ["about-us","about-hugo","contact"]
 [ author ]
-  name = "Levi7"
+  name = "Luke"
 +++
 
-Hi, I'm **Levi7**. Welcome to my blog.
+Hi, I'm **Luke**. Welcome to my blog.
 
 This site is built with [Hugo](https://gohugo.io) and uses the
 [Hello Friend NG](https://github.com/rhazdon/hugo-theme-hello-friend-ng) theme.

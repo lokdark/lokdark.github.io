@@ -1,6 +1,4 @@
-# Levi7's Blog
-
-基于 [Hugo](https://gohugo.io) 与 [hello-friend-ng](https://github.com/rhazdon/hugo-theme-hello-friend-ng) 主题的个人博客，最终发布到 GitHub Pages（仓库 `dizzy-77/dizzy-77.github.io`）。
+# Luke's Blog
 
 ## 目录结构
 
@@ -10,11 +8,11 @@
 | `content/` | 文章与页面（Markdown） |
 | `content/posts/` | 博客文章 |
 | `content/about.md`、`content/about/me.md` | About / About Me 页面（About Me 不在导航里，从 About 页进入） |
-| `archetypes/default.md`、`archetypes/posts.md` | `hugo new` 新建文件时套用的模板（`content/posts/` 下用 `posts.md`，自带 `author: Levi7`） |
+| `archetypes/default.md`、`archetypes/posts.md` | `hugo new` 新建文件时套用的模板（`content/posts/` 下用 `posts.md`，自带 `author: Luke`） |
 | `layouts/partials/extra-head.html` | 站点级覆写：把默认配色固定为暗色（见下方「配色」） |
 | `layouts/index.html` | 站点级覆写：首页 = 头像 + 大标题 + 打字机副标题 + 分类卡片 + 最新文章 |
 | `content/categories/<key>/_index.md` | 分类页：`title` / `description` / `weight`，首页分类卡片由它生成（见下方「分类」） |
-| `static/css/levi7.css` | 站点级样式：首页卡片、社交图标行、头像修饰（通过 `hugo.toml` 的 `customCSS` 挂载） |
+| `static/css/Luke.css` | 站点级样式：首页卡片、社交图标行、头像修饰（通过 `hugo.toml` 的 `customCSS` 挂载） |
 | `static/img/avatar.jpg` | 首页头像（`[params.portrait]`），480×480 正方形；换图直接替换此文件或改 `path` |
 | `layouts/partials/subtitle.html` | 站点级覆写：首页副标题的打字机动画（见下方「打字机效果」） |
 | `themes/hello-friend-ng/` | 主题源码（MIT License），原样保留，可自行修改或整体替换 |
@@ -106,7 +104,7 @@ hugo server -D
   `params.logo.logoText`、`params.footer.*`。
 - `content/about.md`、`content/about/me.md`：个人介绍（About Me 页面仍在，只是不再放在导航里，可从 About 页进入）。
 - 首页头像：`hugo.toml` 里 `[params.portrait]`（`path` / `alt` / `maxWidth`），删掉整块即不显示。图片要求正方形，建议 400px 以上。
-- 首页卡片样式：`static/css/levi7.css`，`.home-cards` 的 `max-width`、`gap` 可调。
+- 首页卡片样式：`static/css/Luke.css`，`.home-cards` 的 `max-width`、`gap` 可调。
 - 社交图标：`hugo.toml` 的 `[[params.social]]`，`name` 取值见 `themes/hello-friend-ng/docs/svgs.md`。
 - `content/posts/hello-world.md`：Hugo 官方自带的 4 篇示例文章已删除，这里留了一篇空文章当样板；
   写新文章时直接复制它的 front matter 即可。
@@ -139,12 +137,12 @@ hugo server -D
 | 字段 | 作用 | 当前值 |
 | --- | --- | --- |
 | `trademark` | `© 年份`，填数字即显示，删掉则不显示 | `2026` |
-| `author` | 作者名链接，取 `params.author.name` | `true`（显示 Levi7） |
+| `author` | 作者名链接，取 `params.author.name` | `true`（显示 Luke） |
 | `rss` | RSS 图标（那个像 wifi 的图标） | `true` |
 | `copyright` | 版权声明，取站点 `copyright` / `[languages.xx] copyright` | `false`（已关） |
 | `topText` / `bottomText` | 页脚上下两行自定义 HTML | 均为空（已清空） |
 
-RSS 订阅源里的 `<copyright>` 取站点顶层 `copyright`（现在是 `© 2026 Levi7`），与页脚显示无关。
+RSS 订阅源里的 `<copyright>` 取站点顶层 `copyright`（现在是 `© 2026 Luke`），与页脚显示无关。
 
 **关于主题署名是不是必须保留**：主题 `hello-friend-ng` 是 MIT 许可。MIT 的要求是「分发时保留版权声明和许可文本」，也就是仓库里的 `themes/hello-friend-ng/LICENSE.md` 必须留着（它已经在仓库里），**并不要求**在页面上显示 "Powered by Hugo / Theme ..."。所以把页脚那行删掉完全没问题。
 

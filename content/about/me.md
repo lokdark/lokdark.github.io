@@ -3,10 +3,10 @@ title = "Me"
 date = "2014-04-09"
 aliases = ["about-us","about-hugo","contact"]
 [ author ]
-  name = "Levi7"
+  name = "Luke"
 +++
 
-Hi, I'm Levi7.
+Hi, I'm Luke.
 
 I keep this blog to write down what I learn about software, systems and
 everything else that catches my attention.

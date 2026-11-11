@@ -3,7 +3,7 @@ title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
 author:
-  name: "Levi7"
+  name: "Luke"
 description: ""
 tags: []
 categories: []
