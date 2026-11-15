@@ -6,7 +6,11 @@
 # Change this if the site is published somewhere else (custom domain, user page, ...).
 baseURL = "https://lokdark.github.io/"
 
-title        = "Luke"
+# Used as the browser tab title (and the RSS channel title). The theme appends
+# `[languages.en.params] subtitle` to it as "— <subtitle>", so the subtitle was
+# removed to avoid "Luke's Blog — Luke's Blog"; inner pages read
+# "<page title> :: Luke's Blog".
+title        = "Luke's Blog"
 locale       = "en-us"
 
 # Language of the content in ./content. Add [languages.xx] blocks below to go
@@ -191,8 +195,9 @@ disableHugoGeneratorInject = false
 [languages]
   [languages.en]
     weight    = 1
-  [languages.en.params]
-    subtitle = "Luke's Blog"
+    # `[languages.en.params] subtitle = "Luke's Blog"` intentionally removed:
+    # that value is only appended to <title> as "— <subtitle>", which would now
+    # read "Luke's Blog — Luke's Blog".
 
 [menu]
   # The About entry is disabled: `layouts/partials/menu.html` only renders the
