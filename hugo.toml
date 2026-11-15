@@ -57,7 +57,10 @@ disableHugoGeneratorInject = false
 #     ID = 'G-MEASUREMENT_ID'
 
 [permalinks]
-  posts = "/posts/:year/:month/:title/"
+  # `:slug` (not `:title`) so a Chinese-titled post can get a readable URL by
+  # setting `slug` in its front matter; without a slug it falls back to the
+  # slugified title, exactly like `:title` did before.
+  posts = "/posts/:year/:month/:slug/"
 
 [taxonomies]
   tag      = "tags"
