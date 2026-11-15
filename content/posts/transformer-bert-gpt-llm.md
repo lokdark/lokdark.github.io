@@ -14,11 +14,11 @@ slug: "transformer-bert-gpt-llm"
 
 ## 一、Transformer：一切的起点
 
-Transformer 是 2017 年《Attention Is All You Need》提出的架构，它彻底摆脱了 RNN 的顺序计算，用**自注意力（Self-Attention）**并行建模序列中任意两个位置之间的关系。
+Transformer 是 2017 年《Attention Is All You Need》提出的架构，它彻底摆脱了 RNN 的顺序计算，用**自注意力**（Self-Attention）并行建模序列中任意两个位置之间的关系。
 
 ### 1.1 整体架构
 
-架构分为**编码器（Encoder）**和**解码器（Decoder）**两大部分，中间靠「编码器-解码器注意力」连接。
+架构分为**编码器**（Encoder）和**解码器**（Decoder）两大部分，中间靠「编码器-解码器注意力」连接。
 
 ![Transformer 整体架构](/images/posts/transformer-bert-gpt-llm/01-transformer-architecture.png)
 
