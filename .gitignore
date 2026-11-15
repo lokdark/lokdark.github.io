@@ -5,6 +5,7 @@ resources/_gen/
 # Hugo lock / cache
 .hugo_build.lock
 .hugo_cache/
+.cache-hugo/
 
 # Local Hugo binary used for previewing
 .tools/

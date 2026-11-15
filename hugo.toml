@@ -18,7 +18,7 @@ theme = "hello-friend-ng"
 PygmentsCodeFences = true
 PygmentsStyle      = "monokai"
 
-copyright = "© 2026 Luke" # Only used by the RSS template.
+copyright = "Sparse words are natural" # Footer tagline and RSS <copyright>.
 
 archetypeDir = "archetypes"
 contentDir   = "content"
@@ -132,11 +132,12 @@ disableHugoGeneratorInject = false
     name = "Luke"
 
   [params.footer]
-    # Footer contents: © 2026 · Luke · RSS (set a flag to false to hide it).
-    trademark = 2026
+    # Footer contents: the site `copyright` string · RSS icon.
+    # Set a flag to false to hide that part.
+    trademark = 0      # "© <year>"; 0 (or false) hides it
     rss       = true
-    author    = true
-    copyright = false
+    author    = false  # link to params.author.name
+    copyright = true   # renders the site-level `copyright` string above
 
     topText    = []
     bottomText = []
@@ -194,10 +195,14 @@ disableHugoGeneratorInject = false
     subtitle = "Luke's Blog"
 
 [menu]
-  [[menu.main]]
-    identifier  = "about"
-    name        = "About"
-    url         = "about/"
+  # The About entry is disabled: `layouts/partials/menu.html` only renders the
+  # entries listed here, so commenting the block out removes the link from the
+  # header. The page itself (content/about.md) keeps being built and is still
+  # reachable at /about/ — uncomment the block to show the link again.
+  # [[menu.main]]
+  #   identifier  = "about"
+  #   name        = "About"
+  #   url         = "about/"
 
   [[menu.main]]
     identifier = "categories"

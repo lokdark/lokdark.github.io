@@ -1,0 +1,33 @@
+{{- /*
+  Site-level override for the taxonomy overview page (/categories/, /tags/).
+
+  The header no longer links here — "Categories" in the nav is a dropdown — but
+  the URL still resolves, so it lists the terms as the same cards used on the
+  home page instead of Hugo's bare link list.
+*/ -}}
+{{ define "main" }}
+    <div class="content">
+        <main class="posts">
+            <h1 class="list-title">{{ .Title }}</h1>
+
+            {{ if .Content }}
+                <div class="list-intro">{{ .Content }}</div>
+            {{ end }}
+
+            {{ if .Pages }}
+                <div class="home-cats list-cats">
+                    {{ range .Pages.ByWeight }}
+                        {{ $count := len .Pages }}
+                        <a class="home-cat" href="{{ .RelPermalink }}">
+                            <span class="home-cat__name">{{ .Title }}</span>
+                            {{ with .Description }}<span class="home-cat__desc">{{ . }}</span>{{ end }}
+                            <span class="home-cat__meta">{{ $count }} post{{ if ne $count 1 }}s{{ end }}</span>
+                        </a>
+                    {{ end }}
+                </div>
+            {{ else }}
+                <p class="list-empty">Nothing here yet.</p>
+            {{ end }}
+        </main>
+    </div>
+{{ end }}

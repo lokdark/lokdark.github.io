@@ -6,13 +6,11 @@
     2. the big <h1> (param `homeTitle`);
     3. the typed subtitle (layouts/partials/subtitle.html);
     4. social icons ([params.social]);
-    5. category cards — one per taxonomy term, i.e. one per
-       content/categories/<key>/_index.md, ordered by their `weight`;
-    6. the latest posts (`homePostsCount`).
+    5. the latest posts (`homePostsCount`).
 
-  Categories are content-backed: add a folder + `_index.md` and it shows up
-  here automatically, even before any post uses it.
-  Card styling lives in static/css/Luke.css (loaded through `customCSS`).
+  The category cards that used to sit between 4 and 5 were removed; the
+  category pages are still reachable from the header dropdown
+  (layouts/partials/menu.html).
 */ -}}
 {{ define "body" }}
     <body class="{{ if .Site.Params.backgroundImage }} background-image" style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
@@ -38,23 +36,6 @@
             </div>
         </main>
     </div>
-
-    {{- with (site.GetPage "/categories").Pages.ByWeight }}
-        <section class="home-section">
-            <h2 class="home-section__title">Categories</h2>
-            <div class="home-cats">
-                {{ range . }}
-                    {{ $count := 0 }}
-                    {{ with index site.Taxonomies.categories .Data.Term }}{{ $count = len . }}{{ end }}
-                    <a class="home-cat" href="{{ .RelPermalink }}">
-                        <span class="home-cat__name">{{ .Title }}</span>
-                        {{ with .Description }}<span class="home-cat__desc">{{ . }}</span>{{ end }}
-                        <span class="home-cat__meta">{{ $count }} post{{ if ne $count 1 }}s{{ end }}</span>
-                    </a>
-                {{ end }}
-            </div>
-        </section>
-    {{- end }}
 
     {{- $count := .Site.Params.homePostsCount | default 3 -}}
     {{- with first $count (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}

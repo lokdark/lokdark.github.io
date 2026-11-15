@@ -11,7 +11,7 @@
 | `archetypes/default.md`、`archetypes/posts.md` | `hugo new` 新建文件时套用的模板（`content/posts/` 下用 `posts.md`，自带 `author: Luke`） |
 | `layouts/partials/extra-head.html` | 站点级覆写：把默认配色固定为暗色（见下方「配色」） |
 | `layouts/index.html` | 站点级覆写：首页 = 头像 + 大标题 + 打字机副标题 + 分类卡片 + 最新文章 |
-| `content/categories/<key>/_index.md` | 分类页：`title` / `description` / `weight`，首页分类卡片由它生成（见下方「分类」） |
+| `content/categories/<key>/_index.md` | 分类页：`title` / `description` / `weight`，页头 Categories 下拉由它生成（见下方「分类」） |
 | `static/css/Luke.css` | 站点级样式：首页卡片、社交图标行、头像修饰（通过 `hugo.toml` 的 `customCSS` 挂载） |
 | `static/img/avatar.jpg` | 首页头像（`[params.portrait]`），480×480 正方形；换图直接替换此文件或改 `path` |
 | `layouts/partials/subtitle.html` | 站点级覆写：首页副标题的打字机动画（见下方「打字机效果」） |
@@ -108,7 +108,14 @@ hugo server -D
 - 社交图标：`hugo.toml` 的 `[[params.social]]`，`name` 取值见 `themes/hello-friend-ng/docs/svgs.md`。
 - `content/posts/hello-world.md`：Hugo 官方自带的 4 篇示例文章已删除，这里留了一篇空文章当样板；
   写新文章时直接复制它的 front matter 即可。
-- `[menu]`：页头导航是 About / Categories / Posts（顺序按主题的 `identifier` 字母序）。About 早先是悬停下拉菜单（所以点它没反应），现已改成直接跳 `/about/` 的普通链接。
+- `[menu]`：页头导航现在是 Categories / Posts（顺序按主题的 `identifier` 字母序）。About 那一项已在 `hugo.toml` 里**注释掉**，
+  所以页头不再显示「About」，但页面本身还在、地址 `/about/` 仍可访问；把 `[[menu.main]]` 那三行取消注释即可恢复链接；
+  **Categories 不是链接**，改成悬停/聚焦时弹出的下拉面板，条目由 `content/categories/<key>/_index.md` 自动生成
+  （见 `layouts/partials/menu.html`，样式是 `static/css/Luke.css` 里的 `.menu-item--sub` / `.menu-sub`）。
+  所以新增分类只建目录，不用改菜单配置；`/categories/` 总览页不再从导航进入，但地址仍然可用。
+- 列表页版式：`layouts/_default/list.html`（`/posts/`、分类页、标签页）与 `layouts/_default/terms.html`
+  （`/categories/`、`/tags/` 总览）都改成了卡片式，复用首页的 `.home-card` / `.home-cat` 样式：
+  每条显示日期 + 阅读时长、标题、摘要（`summary` 或自动摘要）和标签。
 - `[params] enableGlobalLanguageMenu`：语言切换菜单（页头右侧的 `en`）已关闭，站点只有一种语言时用不到。
 - 绑定自定义域名：把域名写进 `static/CNAME`，并把 `baseURL` 改为该域名。
 - 评论区：`hugo.toml` 里已预留 `[params.utterances]` 配置（基于 GitHub Issues），需要时取消注释并填上 `repository`。
@@ -136,13 +143,13 @@ hugo server -D
 
 | 字段 | 作用 | 当前值 |
 | --- | --- | --- |
-| `trademark` | `© 年份`，填数字即显示，删掉则不显示 | `2026` |
-| `author` | 作者名链接，取 `params.author.name` | `true`（显示 Luke） |
+| `trademark` | `© 年份`，填数字即显示，删掉则不显示 | `0`（不显示） |
+| `author` | 作者名链接，取 `params.author.name` | `false`（不显示 Luke） |
 | `rss` | RSS 图标（那个像 wifi 的图标） | `true` |
-| `copyright` | 版权声明，取站点 `copyright` / `[languages.xx] copyright` | `false`（已关） |
+| `copyright` | 版权声明，取站点 `copyright` / `[languages.xx] copyright` | `true`（显示 `Sparse words are natural`） |
 | `topText` / `bottomText` | 页脚上下两行自定义 HTML | 均为空（已清空） |
 
-RSS 订阅源里的 `<copyright>` 取站点顶层 `copyright`（现在是 `© 2026 Luke`），与页脚显示无关。
+RSS 订阅源里的 `<copyright>` 取站点顶层 `copyright`（现在是 `Sparse words are natural`），与页脚显示的是同一个字符串。
 
 **关于主题署名是不是必须保留**：主题 `hello-friend-ng` 是 MIT 许可。MIT 的要求是「分发时保留版权声明和许可文本」，也就是仓库里的 `themes/hello-friend-ng/LICENSE.md` 必须留着（它已经在仓库里），**并不要求**在页面上显示 "Powered by Hugo / Theme ..."。所以把页脚那行删掉完全没问题。
 
@@ -161,8 +168,8 @@ RSS 订阅源里的 `<copyright>` 取站点顶层 `copyright`（现在是 `© 20
 | `engineering` | Engineering Practice | `content/categories/engineering/_index.md` |
 
 - 给文章归类：在 front matter 里写 `categories: ["learning"]`，也可以同时写两个。
-- 首页的「CATEGORIES」卡片自动来自 `content/categories/` 下的目录：顺序由各自 `_index.md` 的 `weight` 决定，描述取 `description`，文章数自动统计（草稿不计入）。
+- 分类的入口是页头的 Categories 下拉（`layouts/partials/menu.html`）：条目自动来自 `content/categories/` 下的目录，顺序由各自 `_index.md` 的 `weight` 决定，描述取 `description`。**首页不再显示分类卡片**，只保留「LATEST POSTS」。
 - 分类页地址是 `/categories/<key>/`，`/categories/` 是总览页；文章正文顶部的分类链接由主题的 `partials/categories.html` 渲染，不用改。
-- 新增方向：建一个 `content/categories/<key>/_index.md`，写好 `title`、`description`、`weight` 就行，模板和配置都不用动；某个分类暂时没有文章也会显示卡片。
+- 新增方向：建一个 `content/categories/<key>/_index.md`，写好 `title`、`description`、`weight` 就行，模板和配置都不用动；某个分类暂时没有文章也会出现在下拉里。
 - key 用英文：中文 key 会生成 `/categories/%E6%8A%80%E6%9C%AF/` 这种百分号 URL。
-- 首页「LATEST POSTS」区块显示最新 `homePostsCount`（当前 3）篇文章。
+- 首页只显示最新 `homePostsCount`（当前 3）篇文章，卡片样式与 `/posts/` 列表页相同。

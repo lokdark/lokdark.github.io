@@ -1,0 +1,51 @@
+{{- /*
+  Site-level override of the theme's `_default/list.html`.
+
+  Used by every list page: /posts/ (section), /categories/ and the category
+  term pages, /tags/ and the tag term pages. Instead of the theme's bare
+  "title …… date" rows, each entry is the same card used on the home page:
+  date + reading time, title, a short excerpt and the tags.
+
+  Card styling is shared with layouts/index.html (static/css/Luke.css).
+*/ -}}
+{{ define "main" }}
+    {{ $paginator := .Paginate .Data.Pages }}
+
+    <div class="content">
+        <main class="posts">
+            <h1 class="list-title">{{ .Title }}</h1>
+
+            {{ if .Content }}
+                <div class="list-intro">{{ .Content }}</div>
+            {{ end }}
+
+            {{ if $paginator.Pages }}
+                <div class="list-cards">
+                    {{ range $paginator.Pages }}
+                        <article class="home-card">
+                            <a class="home-card__link" href="{{ .Permalink }}">
+                                <div class="home-card__meta">
+                                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format (.Site.Params.dateformShort | default "Jan 2") .Date }}</time>
+                                    {{ with .ReadingTime }}<span class="sep">·</span><span>{{ . }} min read</span>{{ end }}
+                                </div>
+                                <h2 class="home-card__title">{{ .Title }}</h2>
+                                {{ with .Summary }}
+                                    <p class="home-card__summary">{{ . | plainify | truncate 200 }}</p>
+                                {{ end }}
+                                {{ with .Params.tags }}
+                                    <div class="home-card__tags">
+                                        {{ range . }}<span class="home-card__tag">#{{ . }}</span>{{ end }}
+                                    </div>
+                                {{ end }}
+                            </a>
+                        </article>
+                    {{ end }}
+                </div>
+            {{ else }}
+                <p class="list-empty">Nothing here yet.</p>
+            {{ end }}
+
+            {{ partial "pagination-list.html" . }}
+        </main>
+    </div>
+{{ end }}

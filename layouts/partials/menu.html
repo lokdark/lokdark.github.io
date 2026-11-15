@@ -1,0 +1,44 @@
+{{- /*
+  Site-level override of the theme's `partials/menu.html`.
+
+  Differences from the theme version:
+    * the "Categories" entry no longer links to /categories/ — it opens a
+      hover/focus dropdown instead;
+    * the dropdown entries are generated from the content-backed categories
+      (content/categories/<key>/_index.md), so adding a folder + _index.md is
+      enough, nothing has to be wired up in hugo.toml;
+    * the markup is valid (`<li>` + nested `<ul>`) — the theme wraps a `<div>`
+      inside the `<ul>`, which browsers hoist out of the list.
+
+  Styling lives in static/css/Luke.css (`.menu-item--sub`, `.menu-sub`).
+*/ -}}
+<nav class="menu">
+    <ul class="menu__inner">
+        {{- range sort .Site.Menus.main ".Identifier" }}
+            {{- if eq .Identifier "categories" }}
+                <li class="menu-item menu-item--sub">
+                    <button type="button" class="menu-item__label" aria-haspopup="true">
+                        {{ .Name }}
+                        <svg class="menu-item__caret" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <ul class="menu-sub">
+                        {{- with (site.GetPage "/categories").Pages.ByWeight }}
+                            {{- range . }}
+                                <li>
+                                    <a href="{{ .RelPermalink }}">
+                                        <span class="menu-sub__name">{{ .Title }}</span>
+                                        {{- with .Description }}<span class="menu-sub__desc">{{ . }}</span>{{ end }}
+                                    </a>
+                                </li>
+                            {{- end }}
+                        {{- else }}
+                            <li><span class="menu-sub__empty">No categories yet</span></li>
+                        {{- end }}
+                    </ul>
+                </li>
+            {{- else }}
+                <li class="menu-item"><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+            {{- end }}
+        {{- end }}
+    </ul>
+</nav>
