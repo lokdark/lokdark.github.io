@@ -1,6 +1,6 @@
 ---
 title: "从 Transformer 到 LLM：大模型基础学习"
-date: 2026-11-15T14:20:00+08:00
+date: 2025-10-15T14:20:00+08:00
 draft: false
 author:
   name: "Luke"
