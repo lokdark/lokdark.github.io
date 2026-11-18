@@ -41,7 +41,8 @@ slug: "agent-skills-notes"
 | MCP Server | 工具/数据的接入协议 | 能力供给层 | 按需连接 | 是 | MCP server |
 | Agent | 规划 + 记忆 + 工具/技能调度 | 系统 | 最高 | 否 | LangGraph / SDK |
 
-三条容易踩错的边界：
+容易混淆的点：
+
 **1.Skill 与 MCP：不是替代，而是分工。** MCP 是工具层的通信协议，负责"能发现什么工具、能调什么 API、能读写什么数据"——扩展的是 Agent 的**行动半径**；Skill 是知识封装，负责"面对这类任务该按什么流程走、先调谁后调谁"——提供的是**操作手册**。官方参考架构也体现了这层分工：**Agent 配置（技能 + MCP Server）+ Agent 虚拟机（文件系统 + bash/python）**[1]，一个对外、一个对内、一个提供执行环境。
 
 **2.Skill 不是长 Prompt。** 长 Prompt 无法按需加载、无法带脚本、无法被检索、无法复用；Skill 的正文建议控制在 5000 tokens 以内，超额部分拆到 `references/`[8]。
